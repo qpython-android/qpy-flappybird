@@ -1,5 +1,4 @@
 #qpy:pygame
-#qpy:landscape
 '''
 Android is much faster with hardware rendering
 This dirty code shows how it could be done
@@ -17,7 +16,12 @@ Writing everything correctly from start (Sprite) is preferred
 '''
 
 import posix
-D = posix.environ['ANDROID_ARGUMENT']+'/'
+try:
+    D = posix.environ['ANDROID_ARGUMENT']+'/'
+except:
+    D = ''
+    pass
+
 
 
 def SCREEN_blit(what, at):
@@ -42,10 +46,10 @@ from pygame.locals import *
 from pygame.render import *
 
 FPS = 30
-SCREENWIDTH = 288 * 2
-SCREENHEIGHT = 512 * 2
+SCREENWIDTH = 288 * 2 * 2.5
+SCREENHEIGHT = 512 * 2 * 2.5
 # amount by which base can maximum shift to left
-PIPEGAPSIZE = 100 * 2  # gap between upper and lower part of pipe
+PIPEGAPSIZE = 100 * 2 *2.5  # gap between upper and lower part of pipe
 BASEY = SCREENHEIGHT * 0.79
 # image, sound and hitmask  dicts
 IMAGES, SOUNDS, HITMASKS = {}, {}, {}
@@ -105,7 +109,17 @@ def main():
         pygame_display_update = pygame.display.update
 
     # numbers sprites for score display
-    IMAGES['numbers'] = (pygame.image.load(D+'assets/sprites/0.png').convert_alpha(), pygame.image.load(D+'assets/sprites/1.png').convert_alpha(), pygame.image.load(D+'assets/sprites/2.png').convert_alpha(), pygame.image.load(D+'assets/sprites/3.png').convert_alpha(), pygame.image.load(D+'assets/sprites/4.png').convert_alpha(), pygame.image.load(D+'assets/sprites/5.png').convert_alpha(), pygame.image.load(D+'assets/sprites/6.png').convert_alpha(), pygame.image.load(D+'assets/sprites/7.png').convert_alpha(), pygame.image.load(D+'assets/sprites/8.png').convert_alpha(), pygame.image.load(D+'assets/sprites/9.png').convert_alpha())
+    IMAGES['numbers'] = (
+        pygame.image.load(D+'assets/sprites/0.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/1.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/2.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/3.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/4.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/5.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/6.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/7.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/8.png').convert_alpha(),
+        pygame.image.load(D+'assets/sprites/9.png').convert_alpha())
 
     # game over sprite
     IMAGES['gameover'] = pygame.image.load(D+'assets/sprites/gameover.png').convert_alpha()
@@ -200,7 +214,7 @@ def showWelcomeAnimation():
                 }
 
         # adjust playery, playerIndex, basex
-        if (loopIter + 1) % 5 == 0:
+        if (loopIter + 1) % 2 == 0:
             playerIndex = next(playerIndexGen)
         loopIter = (loopIter + 1) % 30
         basex = -((-basex + 4) % baseShift)
@@ -252,7 +266,7 @@ def mainGame(movementInfo):
         },
     ]
 
-    pipeVelX = -4
+    pipeVelX = -4*3
 
     # player velocity, max velocity, downward accleration, accleration on flap
     playerVelY = -9  # player's velocity along Y, default same as playerFlapped
@@ -317,7 +331,7 @@ def mainGame(movementInfo):
             lPipe['x'] += pipeVelX
 
         # add new pipe when first pipe is about to touch left of screen
-        if 0 < upperPipes[0]['x'] < 5:
+        if 0 < upperPipes[0]['x'] < 5*3:
             newPipe = getRandomPipe()
             upperPipes.append(newPipe[0])
             lowerPipes.append(newPipe[1])
