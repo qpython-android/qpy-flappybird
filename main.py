@@ -214,7 +214,7 @@ def showWelcomeAnimation():
                 }
 
         # adjust playery, playerIndex, basex
-        if (loopIter + 1) % 2 == 0:
+        if (loopIter + 1) % 5 == 0:
             playerIndex = next(playerIndexGen)
         loopIter = (loopIter + 1) % 30
         basex = -((-basex + 4) % baseShift)
@@ -269,14 +269,14 @@ def mainGame(movementInfo):
     pipeVelX = -4*3
 
     # player velocity, max velocity, downward accleration, accleration on flap
-    playerVelY = -9  # player's velocity along Y, default same as playerFlapped
-    playerMaxVelY = 10  # max vel along Y, max descend speed
-    playerMinVelY = -8  # min vel along Y, max ascend speed
-    playerAccY = 1  # players downward accleration
+    playerVelY = -9*3  # player's velocity along Y, default same as playerFlapped
+    playerMaxVelY = 10*3  # max vel along Y, max descend speed
+    playerMinVelY = -8*3  # min vel along Y, max ascend speed
+    playerAccY = 1*3  # players downward accleration
     playerRot = 45  # player's rotation
     playerVelRot = 3  # angular speed
-    playerRotThr = 20  # rotation threshold
-    playerFlapAcc = -9  # players speed on flapping
+    playerRotThr = 20*3  # rotation threshold
+    playerFlapAcc = -9*3  # players speed on flapping
     playerFlapped = False  # True when player flaps
 
     while True:
@@ -299,7 +299,7 @@ def mainGame(movementInfo):
         playerMidPos = playerx + IMAGES['player'][0].get_width() / 2
         for pipe in upperPipes:
             pipeMidPos = pipe['x'] + IMAGES['pipe'][0].get_width() / 2
-            if pipeMidPos <= playerMidPos < pipeMidPos + 4:
+            if pipeMidPos <= playerMidPos < pipeMidPos + 4*3:
                 score += 1
                 SOUNDS['point'].play()
 
