@@ -412,13 +412,14 @@ def showGameOverScreen(crashInfo):
         gameoverx = int((SCREENWIDTH - IMAGES['message'].get_width()) / 2)
         gameovery = int(SCREENHEIGHT * 0.32)
 
-        SCREEN_blit(IMAGES['gameover'], (gameoverx, gameovery))
 
         for uPipe, lPipe in zip(upperPipes, lowerPipes):
             SCREEN_blit(IMAGES['pipe'][0], (uPipe['x'], uPipe['y']))
             SCREEN_blit(IMAGES['pipe'][1], (lPipe['x'], lPipe['y']))
 
         SCREEN_blit(IMAGES['base'], (basex, BASEY))
+        SCREEN_blit(IMAGES['gameover'], (gameoverx, gameovery))
+
         showScore(score)
 
         playerSurface = pygame.transform.rotate(IMAGES['player'][1], playerRot)
