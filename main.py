@@ -409,6 +409,11 @@ def showGameOverScreen(crashInfo):
         # draw sprites
         SCREEN_blit(IMAGES['background'], (0, 0))
 
+        gameoverx = int((SCREENWIDTH - IMAGES['message'].get_width()) / 2)
+        gameovery = int(SCREENHEIGHT * 0.32)
+
+        SCREEN_blit(IMAGES['gameover'], (gameoverx, gameovery))
+
         for uPipe, lPipe in zip(upperPipes, lowerPipes):
             SCREEN_blit(IMAGES['pipe'][0], (uPipe['x'], uPipe['y']))
             SCREEN_blit(IMAGES['pipe'][1], (lPipe['x'], lPipe['y']))
