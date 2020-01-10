@@ -1,6 +1,6 @@
 # About
 
-QPyFlappybird is a sample game project for QPython which contains pygamesdl2 support. You should install QPython (>=2.4.0) to run it.
+QPyFlappybird is a sample game project for QPython which uses pygamesdl2 features. You should install QPython (>=2.4.0) to run it.
 
 ## How to install
 
